@@ -1,0 +1,23 @@
+﻿# Local cache & system files
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Virtual Environments
+venv/
+env/
+.env
+
+# OS / Editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Archive files
+*.zip
+*.tar.gz
+*.7z
+*.rar
