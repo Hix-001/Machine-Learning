@@ -1,0 +1,22 @@
+﻿================================================================================
+PRODIGY INFOTECH MACHINE LEARNING INTERNSHIP - TASK 01
+House Price Prediction using Linear Regression (Ames Housing Dataset)
+================================================================================
+
+GitHub Repository:
+https://github.com/Hix-001/Prodigy-InfoTech-ML-Internship.git
+
+Project Details:
+- Model: Ultimate Linear Regression Ensemble (Ridge, Lasso, ElasticNet, Huber, RANSAC)
+- Feature Engineering: 200+ Mega Features, Polynomial Degree 2, Box-Cox Transform, Yeo-Johnson
+- Feature Selection: SelectKBest (f_regression) + RFE (Ridge) + SelectFromModel (Lasso)
+- Evaluation Metrics:
+  * R2 Score: 0.9273
+  * Train RMSE: $18,796.95
+  * Train MAE: $13,622.89
+  * 5-Fold CV RMSE (Transformed Scale): 0.0496 (+/- 0.0029)
+  * Live Kaggle RMSLE: 0.16256
+- Generated Test Predictions: 1,459 records in 'my_submission.csv'
+
+Author: Hix-001
+================================================================================

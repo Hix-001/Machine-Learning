@@ -1,0 +1,30 @@
+﻿================================================================================
+PRODIGY INFOTECH MACHINE LEARNING INTERNSHIP - TASK 01 (V6 - KAGGLE MASTER BLEND)
+House Price Prediction - 6-Model Ensemble (Lasso + ElasticNet + Ridge + GBR + XGBoost + LightGBM)
+================================================================================
+
+GitHub Repository:
+https://github.com/Hix-001/Prodigy-InfoTech-ML-Internship.git
+
+Ensemble Composition & Weights:
+- Lasso (α=0.0005)                         : 25%
+- ElasticNet (α=0.0005, L1-ratio=0.9)     : 20%
+- Ridge (α=10.0)                           : 15%
+- Gradient Boosting Regressor (Huber loss) : 15%
+- XGBoost Regressor (reg_alpha, lambda)    : 15%
+- LightGBM Regressor (num_leaves=4)        : 10%
+
+Feature Engineering & Data Pipeline:
+- 222 Competitive dimensions with Box-Cox (λ=0.15) power transforms on skewed variables
+- Robust ordinal label encoding for all architectural ratings
+- Dean De Cock non-arm's length outlier treatment (GrLivArea > 4000 sq ft, SalePrice < $300k)
+- 1,459 test predictions generated
+
+Performance Metrics:
+- Log-Scale RMSLE: 0.08837
+- Coefficient of Determination (R²): 0.956213 (95.62% variance explained)
+- Dollar RMSE: $16,628.87
+- Dollar MAE: $10,557.18
+
+Author: Hix-001
+================================================================================

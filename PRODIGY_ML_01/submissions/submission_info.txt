@@ -1,16 +1,21 @@
-================================================================================
+﻿================================================================================
 PRODIGY INFOTECH MACHINE LEARNING INTERNSHIP - TASK 01
-House Price Prediction using Linear Regression (Ames Housing Dataset)
+House Price Prediction using Advanced Linear Regression (Grandmaster Pipeline)
 ================================================================================
 
 GitHub Repository:
-https://github.com/Hix-001/PRODIGY_ML_01.git
+https://github.com/Hix-001/Prodigy-InfoTech-ML-Internship.git
 
 Project Details:
-- Model: Linear Regression Pipeline with Median Imputation & Standard Scaling
-- Dataset: Ames Housing Dataset (Cloudinary Streamed)
-- Evaluated Metrics: R2 = 0.7470 | RMSE = $39,947.51 | MAE = $26,562.81
-- Generated Test Predictions: 1,459 records formatted in 'my_submission.csv'
+- Model: Tuned Linear Ensemble (Ridge α=14.5 + Ridge α=8.0 + Lasso α=0.0005 + ElasticNet α=0.0005)
+- Feature Engineering: 290 High-Dimensional Columns, Box-Cox Skew Correction (λ=0.15), Dean De Cock Outlier Clean
+- Performance Benchmarks:
+  * Log-Scale RMSLE: 0.09562 (Sub-0.100 Frontier)
+  * 5-Fold Cross-Validation RMSLE: 0.11103 (±0.00722)
+  * R² Score: 0.946100 (Explains 94.61% price variance)
+  * Actual Dollar RMSE: $18,410.55
+  * Actual Dollar MAE: $11,635.05
+- Test Dataset Inferences: 1,459 predictions in 'my_submission.csv'
 
 Author: Hix-001
 ================================================================================

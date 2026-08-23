@@ -1,0 +1,23 @@
+﻿================================================================================
+PRODIGY INFOTECH MACHINE LEARNING INTERNSHIP - TASK 01 (V4 - SUB-0.11 LEADERBOARD PUSHER)
+House Price Prediction - 5-Model Linear Grandmaster Ensemble
+================================================================================
+
+GitHub Repository:
+https://github.com/Hix-001/Prodigy-InfoTech-ML-Internship.git
+
+Pipeline Architectural Highlights:
+- Models: 5-way regularized linear blend (Ridge α=12, Ridge α=18, Lasso α=0.00045, ElasticNet α=0.00045, BayesianRidge)
+- Features: 301 curated continuous and ordinal engineered dimensions
+- Ordinal Quantifications: Functional_Num, BsmtExposure_Num, BsmtFinType_Num, GarageFinish_Num, LandSlope_Num
+- Skew Correction: Box-Cox power transform (λ=0.15) for all numeric features
+- Target Regularization: Neighborhood smoothed Bayesian target encoding
+- Performance:
+  * 10-Fold CV RMSLE: 0.10919 (±0.01656) - Out-of-fold generalization under 0.110
+  * Log-Scale RMSLE: 0.09543
+  * R² Score: 0.946005
+  * Dollar RMSE: $18,426.76 | MAE: $11,646.87
+- Inferences: 1,459 test predictions in 'my_submission.csv'
+
+Author: Hix-001
+================================================================================

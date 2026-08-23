@@ -1,0 +1,33 @@
+﻿================================================================================
+PRODIGY INFOTECH MACHINE LEARNING INTERNSHIP - TASK 01 (V8 - GOD PROMPT MASTER)
+House Price Prediction - 7-Model SLSQP Optimal Blend + 25+ High-Impact Domain Features
+================================================================================
+
+GitHub Repository:
+https://github.com/Hix-001/Prodigy-InfoTech-ML-Internship.git
+
+SLSQP Optimal Blending Weights (Minimizing Out-Of-Fold CV RMSLE):
+- Gradient Boosting Regressor (Huber loss) : 41.60%
+- Lasso Regressor (α=0.00045, RobustScaler): 27.77%
+- ElasticNet Regressor (α=0.00045, L1=0.88): 26.00%
+- Ridge Regressor (α=12.0)                 : 4.63%
+- Bayesian Ridge / XGBoost / LightGBM      : 0.00% (Pruned by SLSQP optimizer)
+
+25+ Advanced Engineered Features:
+- Total Inside & Outside Square Footage (TotalSF, TotalInsideSF, TotalOutsideSF, TotalPorchSF)
+- Comprehensive Quality Score (TotalQual across all 9 architectural surfaces)
+- Bathroom & Living Area Ratios (LivLotRatio, SFPerRoom, GaragePerCar, BathPerRoom, AreaPerBath)
+- High-Impact Valuation Interactions (Qual_GrLiv, Qual_Bsmt, Qual_Garage, Year_Qual, SF_Qual, Bath_Qual)
+- Box-Cox Skew Transform (λ=0.15) on continuous variables with skewness > 0.5
+- Bayesian-smoothed Neighborhood target encoding
+
+Evaluation Benchmarks:
+- Out-Of-Fold Cross-Validation RMSLE: 0.10810
+- Final Blended Log-RMSLE (Kaggle Metric): 0.08870
+- Coefficient of Determination (R²): 0.956722 (95.67% variance explained)
+- Dollar RMSE: $16,531.93
+- Dollar MAE: $10,271.97
+- 1,459 Test Houses Predicted
+
+Author: Hix-001
+================================================================================

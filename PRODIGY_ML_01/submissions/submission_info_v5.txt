@@ -1,0 +1,23 @@
+﻿================================================================================
+PRODIGY INFOTECH MACHINE LEARNING INTERNSHIP - TASK 01 (V5 - SUB-0.10 LEADERBOARD CHASER)
+House Price Prediction - 6-Model Grandmaster Linear + Gradient Boosted Blend
+================================================================================
+
+GitHub Repository:
+https://github.com/Hix-001/Prodigy-InfoTech-ML-Internship.git
+
+Architecture & Modeling:
+- Hybrid Ensemble: Weighted blending of Ridge (α=14, α=8), Lasso (α=0.00045), ElasticNet (α=0.00045), BayesianRidge, and Huber-Loss GradientBoostingRegressor
+- Feature Representation: 301 curated continuous and ordinal dimensions
+- Box-Cox Skew Transform: Power transformation applied across all features with skewness > 0.5
+- Outlier Pruning: Cleaned Dean De Cock abnormal non-arm's length records
+- Evaluation & Benchmarks:
+  * Log-Scale RMSLE: 0.09262
+  * 5-Fold Cross-Validation: 0.10966 (Lasso) / 0.11182 (Ridge) / 0.11413 (GBR)
+  * R² Score: 0.949667 (94.97% of property price variance explained)
+  * Dollar-Scale RMSE: $17,790.94
+  * Dollar-Scale MAE: $11,170.03
+- Output Inferences: 1,459 test predictions in 'my_submission.csv'
+
+Author: Hix-001
+================================================================================

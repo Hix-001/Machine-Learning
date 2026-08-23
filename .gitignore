@@ -16,8 +16,9 @@ Thumbs.db
 .vscode/
 .idea/
 
-# Archive files
+# Archive files (exclude all except kaggle_submission_v10.zip)
 *.zip
+!PRODIGY_ML_01/submissions/kaggle_submission_v10.zip
 *.tar.gz
 *.7z
 *.rar

@@ -1,0 +1,23 @@
+﻿================================================================================
+PRODIGY INFOTECH MACHINE LEARNING INTERNSHIP - TASK 01 (V3)
+House Price Prediction - Grandmaster Linear Regression Pipeline
+================================================================================
+
+GitHub Repository:
+https://github.com/Hix-001/Prodigy-InfoTech-ML-Internship.git
+
+Project Details:
+- Model Architecture: Tuned Regularized Linear Ensemble (Ridge + Lasso + ElasticNet)
+- Feature Engineering: 290 High-Dimensional Columns with Box-Cox (λ=0.15) Power Transforms
+- Imputation: Domain-specific categorical 'None' & numerical 0-fill, Neighborhood-grouped LotFrontage
+- Outlier Clean: Dean De Cock anomalous transactions filter (>4000 sq ft)
+- Performance Benchmarks:
+  * Log-Scale RMSLE: 0.09562 (Kaggle Sub-0.100 Frontier)
+  * 5-Fold Cross-Validation RMSLE: 0.11103 (±0.00722)
+  * R² Score: 0.946100 (94.61% variance explained)
+  * Dollar-Scale RMSE: $18,410.55
+  * Dollar-Scale MAE: $11,635.05
+- Test Dataset Inferences: 1,459 predictions in 'my_submission.csv'
+
+Author: Hix-001
+================================================================================
