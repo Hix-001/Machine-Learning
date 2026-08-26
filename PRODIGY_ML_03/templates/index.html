@@ -3,33 +3,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🐾 Feline & Canine Vision AI · Pinterest Aesthetic Classifier</title>
+  <title>Canine & Feline Vision AI · ResNet-50 Classifier | Prodigy InfoTech</title>
 
-  <!-- Google Fonts: Pacifico & Caveat (Cursive), Plus Jakarta Sans & Outfit (Clean UI) -->
+  <!-- Professional Modern Typography: Plus Jakarta Sans & Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Outfit:wght@300;400;500;600;700&family=Pacifico&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 
   <style>
     :root {
-      --tinted-glass: rgba(18, 16, 26, 0.45);
-      --glass-border: rgba(255, 255, 255, 0.18);
-      --glass-glow: rgba(244, 114, 182, 0.25);
-      --accent-pink: #f472b6;
-      --accent-lavender: #c084fc;
-      --accent-cream: #fef08a;
-      --accent-peach: #fb923c;
-      --text-main: #ffffff;
-      --text-soft: rgba(255, 255, 255, 0.85);
-      --text-muted: rgba(255, 255, 255, 0.6);
-      --radius-xl: 32px;
-      --radius-lg: 24px;
+      --bg-dark: #07090e;
+      --glass-tint: rgba(13, 17, 28, 0.58);
+      --glass-card: rgba(15, 20, 32, 0.68);
+      --glass-border: rgba(255, 255, 255, 0.12);
+      --glass-border-hover: rgba(56, 189, 248, 0.4);
+      --accent-cyan: #38bdf8;
+      --accent-blue: #0284c7;
+      --accent-purple: #a855f7;
+      --accent-cat: #818cf8;
+      --accent-dog: #f43f5e;
+      --accent-invalid: #f59e0b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
       --radius-pill: 9999px;
-      --shadow-dreamy: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.25);
-      --font-cursive-title: 'Pacifico', cursive;
-      --font-cursive-hand: 'Caveat', cursive;
-      --font-ui: 'Outfit', sans-serif;
+      --radius-xl: 24px;
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --shadow-elevation: 0 20px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+      --font-primary: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'Inter', monospace;
     }
 
     * {
@@ -42,13 +46,13 @@
     body {
       min-height: 100vh;
       min-height: 100dvh;
-      font-family: var(--font-ui);
+      font-family: var(--font-primary);
       color: var(--text-main);
-      background-color: #0d0b12;
+      background-color: var(--bg-dark);
       background-image: 
-        linear-gradient(135deg, rgba(13, 11, 18, 0.35) 0%, rgba(20, 16, 30, 0.55) 100%),
-        url('/static/assets/cat%20thinking.png'),
-        url('/static/assets/cat_thinking.jpg');;
+        linear-gradient(135deg, rgba(7, 9, 14, 0.35) 0%, rgba(13, 17, 28, 0.65) 100%),
+        url('/static/assets/cat%20thinking.jpg'),
+        url('/static/assets/cat%20thinking.png');
       background-size: cover;
       background-position: center center;
       background-repeat: no-repeat;
@@ -57,49 +61,27 @@
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
-      padding: 20px 16px;
-      overflow-x: hidden;
+      padding: 24px 16px;
       position: relative;
+      overflow-x: hidden;
     }
 
-    /* Floating sparkling bokeh particles */
-    .sparkle {
-      position: fixed;
-      font-size: 16px;
-      color: var(--accent-pink);
-      opacity: 0.6;
-      pointer-events: none;
-      animation: floatSparkle 6s ease-in-out infinite alternate;
-      z-index: 1;
-    }
-
-    .sparkle-1 { top: 15%; left: 10%; animation-duration: 5s; }
-    .sparkle-2 { top: 25%; right: 12%; animation-duration: 7s; font-size: 22px; color: var(--accent-lavender); }
-    .sparkle-3 { bottom: 20%; left: 15%; animation-duration: 6.5s; color: var(--accent-cream); }
-    .sparkle-4 { bottom: 15%; right: 18%; animation-duration: 5.5s; font-size: 20px; }
-
-    @keyframes floatSparkle {
-      0% { transform: translateY(0px) scale(0.9) rotate(0deg); opacity: 0.3; }
-      100% { transform: translateY(-25px) scale(1.15) rotate(20deg); opacity: 0.85; }
-    }
-
-    /* Container */
-    .app-container {
+    .wrapper {
       width: 100%;
-      max-width: 680px;
-      z-index: 2;
+      max-width: 660px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 20px;
+      gap: 24px;
       margin: auto 0;
+      z-index: 2;
     }
 
-    /* ===== Glass UI Top Menu Bar ===== */
-    .glass-nav {
+    /* ===== Professional Glass Pill Navbar ===== */
+    .navbar-glass {
       width: 100%;
-      max-width: 580px;
-      background: var(--tinted-glass);
+      max-width: 620px;
+      background: var(--glass-tint);
       backdrop-filter: blur(28px);
       -webkit-backdrop-filter: blur(28px);
       border: 1px solid var(--glass-border);
@@ -108,11 +90,11 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      box-shadow: var(--shadow-dreamy);
-      animation: fadeInDown 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+      box-shadow: var(--shadow-elevation);
+      animation: slideDown 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .nav-brand {
+    .brand-group {
       display: flex;
       align-items: center;
       gap: 10px;
@@ -120,172 +102,159 @@
       color: var(--text-main);
     }
 
-    .brand-avatar {
-      width: 36px;
-      height: 36px;
+    .brand-icon {
+      width: 34px;
+      height: 34px;
       border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent-pink), var(--accent-lavender));
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
       display: grid;
       place-items: center;
-      font-size: 18px;
-      box-shadow: 0 4px 12px rgba(244, 114, 182, 0.4);
+      font-size: 15px;
+      color: #04131f;
+      box-shadow: 0 4px 14px rgba(56, 189, 248, 0.4);
     }
 
-    .brand-title {
-      font-family: var(--font-cursive-title);
-      font-size: 20px;
-      letter-spacing: 0.5px;
-      background: linear-gradient(135deg, #ffffff 40%, var(--accent-pink) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+    .brand-name {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.2px;
+      color: #ffffff;
     }
 
-    .nav-links {
+    .brand-tag {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent-cyan);
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      padding: 2px 8px;
+      border-radius: var(--radius-pill);
+    }
+
+    .nav-actions {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
     }
 
-    .nav-pill-btn {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      color: var(--text-soft);
-      padding: 6px 14px;
+    .btn-nav-github {
+      background: #ffffff;
+      color: #090d16;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 7px 16px;
       border-radius: var(--radius-pill);
       font-size: 13px;
-      font-weight: 500;
+      font-weight: 600;
       text-decoration: none;
-      transition: all 0.25s ease;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
 
-    .nav-pill-btn:hover {
-      background: rgba(255, 255, 255, 0.18);
-      color: #ffffff;
+    .btn-nav-github:hover {
+      background: #f1f5f9;
       transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 6px 20px rgba(255, 255, 255, 0.25);
     }
 
-    .nav-pill-btn.active {
-      background: linear-gradient(135deg, var(--accent-pink), var(--accent-lavender));
-      color: #0f0b18;
-      font-weight: 700;
-      border-color: transparent;
-      box-shadow: 0 4px 14px rgba(244, 114, 182, 0.4);
-    }
-
-    /* ===== Pinterest Aesthetic Main Glass Card ===== */
-    .glass-card {
+    /* ===== Main Glass Card ===== */
+    .card-glass {
       width: 100%;
-      background: var(--tinted-glass);
+      background: var(--glass-card);
       backdrop-filter: blur(32px);
       -webkit-backdrop-filter: blur(32px);
       border: 1px solid var(--glass-border);
       border-radius: var(--radius-xl);
-      padding: 36px 32px;
-      box-shadow: var(--shadow-dreamy);
+      padding: 38px 34px;
+      box-shadow: var(--shadow-elevation);
       text-align: center;
-      position: relative;
-      overflow: hidden;
-      animation: fadeInUp 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+      animation: slideUp 0.7s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .glass-card::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle at 50% 20%, rgba(244, 114, 182, 0.15), transparent 60%);
-      pointer-events: none;
-    }
-
-    /* Header Section */
-    .hero-badge {
+    .badge-chip {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 6px 16px;
-      background: rgba(244, 114, 182, 0.15);
-      border: 1px solid rgba(244, 114, 182, 0.35);
+      padding: 5px 14px;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.25);
       border-radius: var(--radius-pill);
       font-size: 12px;
       font-weight: 600;
-      color: var(--accent-pink);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 12px;
+      color: var(--accent-cyan);
+      letter-spacing: 0.3px;
+      margin-bottom: 14px;
     }
 
-    .cursive-hero-title {
-      font-family: var(--font-cursive-title);
-      font-size: clamp(32px, 6vw, 44px);
-      color: #ffffff;
+    .hero-title {
+      font-size: clamp(26px, 5vw, 34px);
+      font-weight: 800;
+      letter-spacing: -0.6px;
       line-height: 1.25;
-      margin-bottom: 6px;
-      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      color: #ffffff;
+      margin-bottom: 8px;
     }
 
-    .cursive-subtitle {
-      font-family: var(--font-cursive-hand);
-      font-size: clamp(20px, 3.8vw, 26px);
-      color: var(--accent-lavender);
-      margin-bottom: 24px;
-      letter-spacing: 0.5px;
+    .hero-subtitle {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.55;
+      margin-bottom: 26px;
+      font-weight: 400;
     }
 
-    /* Dropzone Upload Section */
-    .pinterest-dropzone {
-      border: 2px dashed rgba(255, 255, 255, 0.25);
-      background: rgba(255, 255, 255, 0.03);
+    /* Dropzone Upload */
+    .dropzone-container {
+      border: 2px dashed rgba(255, 255, 255, 0.18);
+      background: rgba(255, 255, 255, 0.02);
       border-radius: var(--radius-lg);
-      padding: 34px 20px;
+      padding: 36px 20px;
       cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       position: relative;
-      margin-bottom: 20px;
+      margin-bottom: 22px;
     }
 
-    .pinterest-dropzone:hover, .pinterest-dropzone.dragover {
-      border-color: var(--accent-pink);
-      background: rgba(244, 114, 182, 0.08);
-      transform: scale(1.015);
-      box-shadow: 0 10px 30px rgba(244, 114, 182, 0.2);
+    .dropzone-container:hover, .dropzone-container.dragover {
+      border-color: var(--accent-cyan);
+      background: rgba(56, 189, 248, 0.06);
+      transform: translateY(-2px);
     }
 
-    .dropzone-icon {
-      width: 64px;
-      height: 64px;
+    .dropzone-icon-box {
+      width: 58px;
+      height: 58px;
       border-radius: 50%;
-      background: linear-gradient(135deg, rgba(244, 114, 182, 0.2), rgba(192, 132, 252, 0.2));
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.2);
       display: inline-grid;
       place-items: center;
-      font-size: 26px;
-      color: #ffffff;
+      font-size: 22px;
+      color: var(--accent-cyan);
       margin-bottom: 12px;
-      transition: transform 0.3s ease;
+      transition: transform 0.25s ease;
     }
 
-    .pinterest-dropzone:hover .dropzone-icon {
-      transform: scale(1.1) rotate(6deg);
+    .dropzone-container:hover .dropzone-icon-box {
+      transform: scale(1.08);
+      background: rgba(56, 189, 248, 0.2);
     }
 
-    .dropzone-title {
-      font-size: 18px;
+    .dropzone-text-main {
+      font-size: 16px;
       font-weight: 600;
+      color: #ffffff;
       margin-bottom: 4px;
     }
 
-    .dropzone-desc {
+    .dropzone-text-sub {
       font-size: 13px;
       color: var(--text-muted);
     }
 
-    .pinterest-dropzone input[type="file"] {
+    .dropzone-container input[type="file"] {
       position: absolute;
       inset: 0;
       opacity: 0;
@@ -294,364 +263,355 @@
       height: 100%;
     }
 
-    /* Live Preview Section */
-    .preview-wrapper {
+    /* Image Preview */
+    .preview-section {
       display: none;
-      margin-bottom: 20px;
+      margin-bottom: 22px;
       animation: fadeIn 0.4s ease;
     }
 
-    .preview-card {
-      background: rgba(0, 0, 0, 0.3);
+    .preview-box {
+      background: rgba(0, 0, 0, 0.4);
       padding: 10px;
       border-radius: var(--radius-lg);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       display: inline-block;
       max-width: 100%;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
     }
 
-    .preview-card img {
+    .preview-box img {
       max-width: 100%;
-      max-height: 240px;
-      border-radius: 16px;
+      max-height: 250px;
+      border-radius: var(--radius-md);
       object-fit: contain;
     }
 
-    .preview-filename {
-      font-family: var(--font-cursive-hand);
-      font-size: 18px;
-      color: var(--accent-cream);
+    .preview-info {
+      font-size: 12px;
+      color: var(--text-muted);
       margin-top: 8px;
+      font-weight: 500;
     }
 
-    /* Action Buttons */
-    .btn-classify {
+    /* Classify Button */
+    .btn-submit {
       width: 100%;
-      padding: 15px 28px;
-      background: linear-gradient(135deg, var(--accent-pink) 0%, var(--accent-lavender) 100%);
-      color: #0d0b12;
-      font-family: var(--font-ui);
-      font-size: 16px;
+      padding: 14px 28px;
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+      color: #04131f;
+      font-family: var(--font-primary);
+      font-size: 15px;
       font-weight: 700;
       border-radius: var(--radius-pill);
       border: none;
       cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-      box-shadow: 0 8px 25px rgba(244, 114, 182, 0.4);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 6px 20px rgba(56, 189, 248, 0.35);
       display: none;
       align-items: center;
       justify-content: center;
       gap: 10px;
     }
 
-    .btn-classify:hover {
-      transform: translateY(-2px) scale(1.02);
-      box-shadow: 0 12px 35px rgba(244, 114, 182, 0.6);
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(56, 189, 248, 0.5);
       filter: brightness(1.05);
     }
 
-    .btn-classify:disabled {
+    .btn-submit:disabled {
       opacity: 0.6;
       cursor: not-allowed;
       transform: none;
     }
 
-    /* Loading Spinner */
-    .loader-wrap {
+    /* Loading Indicator */
+    .loading-box {
       display: none;
       margin: 20px 0;
     }
 
-    .pink-spinner {
-      width: 42px;
-      height: 42px;
-      border: 4px solid rgba(255, 255, 255, 0.1);
-      border-top: 4px solid var(--accent-pink);
+    .loading-spinner {
+      width: 38px;
+      height: 38px;
+      border: 3px solid rgba(255, 255, 255, 0.1);
+      border-top: 3px solid var(--accent-cyan);
       border-radius: 50%;
       animation: spin 0.8s linear infinite;
       margin: 0 auto 10px;
     }
 
-    .loader-text {
-      font-family: var(--font-cursive-hand);
-      font-size: 20px;
-      color: var(--accent-lavender);
+    .loading-text {
+      font-size: 13px;
+      color: var(--text-muted);
     }
 
-    /* Result Card Display */
-    .result-box {
+    /* Results Panel */
+    .results-panel {
       display: none;
-      margin-top: 20px;
+      margin-top: 24px;
       padding: 24px;
       background: rgba(0, 0, 0, 0.35);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: var(--radius-lg);
-      animation: fadeInUp 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+      animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .result-badge {
-      font-family: var(--font-cursive-title);
-      font-size: 26px;
+      font-size: 22px;
+      font-weight: 800;
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      padding: 8px 24px;
+      gap: 8px;
+      padding: 6px 22px;
       border-radius: var(--radius-pill);
       margin-bottom: 8px;
     }
 
     .result-badge.cat {
-      background: rgba(192, 132, 252, 0.2);
-      color: #e9d5ff;
-      border: 1px solid rgba(192, 132, 252, 0.4);
-      box-shadow: 0 4px 18px rgba(192, 132, 252, 0.3);
+      background: rgba(129, 140, 248, 0.18);
+      color: var(--accent-cat);
+      border: 1px solid rgba(129, 140, 248, 0.35);
     }
 
     .result-badge.dog {
-      background: rgba(251, 146, 60, 0.2);
-      color: #ffedd5;
-      border: 1px solid rgba(251, 146, 60, 0.4);
-      box-shadow: 0 4px 18px rgba(251, 146, 60, 0.3);
+      background: rgba(244, 63, 94, 0.18);
+      color: var(--accent-dog);
+      border: 1px solid rgba(244, 63, 94, 0.35);
     }
 
     .result-badge.invalid {
-      background: rgba(244, 114, 182, 0.2);
-      color: #fce7f3;
-      border: 1px solid rgba(244, 114, 182, 0.4);
+      background: rgba(245, 158, 11, 0.18);
+      color: var(--accent-invalid);
+      border: 1px solid rgba(245, 158, 11, 0.35);
     }
 
-    .result-message {
-      font-family: var(--font-cursive-hand);
-      font-size: 22px;
-      color: var(--accent-cream);
+    .result-desc {
+      font-size: 13px;
+      color: var(--text-muted);
       margin-bottom: 16px;
     }
 
-    /* Meter Progress */
-    .confidence-meter {
-      height: 10px;
-      background: rgba(255, 255, 255, 0.1);
+    .progress-bar-container {
+      height: 8px;
+      background: rgba(255, 255, 255, 0.08);
       border-radius: var(--radius-pill);
       overflow: hidden;
       margin-bottom: 16px;
     }
 
-    .confidence-meter-fill {
+    .progress-bar-fill {
       height: 100%;
       border-radius: var(--radius-pill);
       width: 0%;
-      transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: width 0.7s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .confidence-meter-fill.cat { background: linear-gradient(90deg, #c084fc, #e879f9); }
-    .confidence-meter-fill.dog { background: linear-gradient(90deg, #fb923c, #f472b6); }
-    .confidence-meter-fill.invalid { background: linear-gradient(90deg, #eab308, #f59e0b); }
+    .progress-bar-fill.cat { background: linear-gradient(90deg, #6366f1, #818cf8); }
+    .progress-bar-fill.dog { background: linear-gradient(90deg, #e11d48, #fb7185); }
+    .progress-bar-fill.invalid { background: linear-gradient(90deg, #d97706, #fbbf24); }
 
-    /* Score Grid */
-    .score-breakdown {
+    .metrics-row {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 10px;
     }
 
-    .score-chip {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 14px;
+    .metric-chip {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: var(--radius-md);
       padding: 10px;
     }
 
-    .score-chip .chip-label {
+    .metric-chip .chip-title {
       font-size: 11px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      color: var(--text-muted);
+      color: var(--text-dim);
       margin-bottom: 2px;
     }
 
-    .score-chip .chip-val {
-      font-size: 18px;
+    .metric-chip .chip-value {
+      font-size: 16px;
       font-weight: 700;
     }
 
-    .score-chip.cat .chip-val { color: var(--accent-lavender); }
-    .score-chip.dog .chip-val { color: var(--accent-peach); }
-    .score-chip.other .chip-val { color: var(--accent-cream); }
+    .metric-chip.cat .chip-value { color: var(--accent-cat); }
+    .metric-chip.dog .chip-value { color: var(--accent-dog); }
+    .metric-chip.other .chip-value { color: var(--accent-invalid); }
 
-    /* Footer */
-    .pinterest-footer {
+    /* ===== Footer ===== */
+    .footer-section {
       text-align: center;
-      font-family: var(--font-cursive-hand);
-      font-size: 20px;
-      color: var(--text-soft);
+      font-size: 13px;
+      color: var(--text-muted);
       z-index: 2;
       padding-top: 10px;
     }
 
-    .pinterest-footer a {
-      color: var(--accent-pink);
+    .footer-section a {
+      color: var(--text-main);
       text-decoration: none;
-      font-weight: 700;
+      font-weight: 600;
       transition: color 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
 
-    .pinterest-footer a:hover {
-      color: var(--accent-lavender);
+    .footer-section a:hover {
+      color: var(--accent-cyan);
     }
 
     @keyframes spin {
       to { transform: rotate(360deg); }
     }
 
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-20px); }
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-16px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(24px); }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.96); }
+      from { opacity: 0; transform: scale(0.97); }
       to { opacity: 1; transform: scale(1); }
     }
 
     @media (max-width: 480px) {
-      .glass-card { padding: 26px 18px; }
-      .cursive-hero-title { font-size: 28px; }
-      .cursive-subtitle { font-size: 18px; }
-      .score-breakdown { grid-template-columns: 1fr; }
+      .card-glass { padding: 28px 18px; }
+      .hero-title { font-size: 24px; }
+      .metrics-row { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Floating Ambient Sparkles -->
-  <div class="sparkle sparkle-1">✨</div>
-  <div class="sparkle sparkle-2">🌸</div>
-  <div class="sparkle sparkle-3">💖</div>
-  <div class="sparkle sparkle-4">🐾</div>
+  <div class="wrapper">
 
-  <div class="app-container">
-
-    <!-- ===== Glass UI Nav Menu ===== -->
-    <header class="glass-nav">
-      <a href="/" class="nav-brand">
-        <div class="brand-avatar">🐱</div>
-        <span class="brand-title">Meow & Bark AI</span>
+    <!-- ===== Professional Glass Navbar ===== -->
+    <header class="navbar-glass">
+      <a href="/" class="brand-group">
+        <div class="brand-icon">
+          <i class="fas fa-paw"></i>
+        </div>
+        <span class="brand-name">Vision AI</span>
+        <span class="brand-tag">Task 03</span>
       </a>
 
-      <nav class="nav-links">
-        <a href="/" class="nav-pill-btn active">
-          <i class="fas fa-magic"></i> Explore
+      <div class="nav-actions">
+        <a href="https://github.com/Hix-001/Prodigy-InfoTech-ML-Internship/tree/main/PRODIGY_ML_03" target="_blank" class="btn-nav-github">
+          <i class="fab fa-github"></i> Repository
         </a>
-        <a href="https://github.com/Hix-001/Prodigy-InfoTech-ML-Internship/tree/main/PRODIGY_ML_03" target="_blank" class="nav-pill-btn">
-          <i class="fab fa-github"></i> GitHub
-        </a>
-      </nav>
+      </div>
     </header>
 
-    <!-- ===== Main Glassmorphic Card ===== -->
-    <main class="glass-card">
-      <div class="hero-badge">
-        <span>🐾 ResNet-50 Vision Intelligence</span>
+    <!-- ===== Main Glassmorphic Prediction Card ===== -->
+    <main class="card-glass">
+      <div class="badge-chip">
+        <i class="fas fa-brain"></i> Pre-trained ResNet-50 Architecture
       </div>
 
-      <h1 class="cursive-hero-title">Are you a Cat or a Dog?</h1>
-      <p class="cursive-subtitle">Drop your favorite pet photo & let our AI decide ✨</p>
+      <h1 class="hero-title">Canine & Feline Image Classifier</h1>
+      <p class="hero-subtitle">Upload any image to execute real-time deep transfer inference and multi-class verification.</p>
 
-      <!-- Dropzone -->
-      <div class="pinterest-dropzone" id="dropzone">
-        <div class="dropzone-icon">
+      <!-- Dropzone Upload Area -->
+      <div class="dropzone-container" id="dropzone">
+        <div class="dropzone-icon-box">
           <i class="fas fa-cloud-arrow-up"></i>
         </div>
-        <h3 class="dropzone-title">Drop your cute image here</h3>
-        <p class="dropzone-desc">Supports PNG, JPG, JPEG, WEBP · Tap or drag & drop</p>
-        <input type="file" id="imageInput" accept="image/*">
+        <div class="dropzone-text-main">Drop your image here</div>
+        <div class="dropzone-text-sub">Supports PNG, JPG, JPEG, WEBP · Drag & drop or browse</div>
+        <input type="file" id="fileInput" accept="image/*">
       </div>
 
-      <!-- Preview Image -->
-      <div class="preview-wrapper" id="previewWrapper">
-        <div class="preview-card">
-          <img id="previewImg" alt="Selected Pet Image">
-          <div class="preview-filename" id="previewFilename"></div>
+      <!-- Preview Box -->
+      <div class="preview-section" id="previewSection">
+        <div class="preview-box">
+          <img id="previewImg" alt="Input Preview">
+          <div class="preview-info" id="previewInfo"></div>
         </div>
       </div>
 
-      <!-- Classify Button -->
-      <button class="btn-classify" id="classifyBtn">
-        <i class="fas fa-sparkles"></i> Classify Pet ✨
+      <!-- Submit Button -->
+      <button class="btn-submit" id="submitBtn">
+        <i class="fas fa-bolt"></i> Classify Image
       </button>
 
       <!-- Loading State -->
-      <div class="loader-wrap" id="loaderWrap">
-        <div class="pink-spinner"></div>
-        <div class="loader-text">Analyzing cuteness tensors... 🐾</div>
+      <div class="loading-box" id="loadingBox">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Computing ResNet-50 visual feature embeddings...</div>
       </div>
 
-      <!-- Result Card -->
-      <div class="result-box" id="resultBox">
+      <!-- Results Display Panel -->
+      <div class="results-panel" id="resultsPanel">
         <div class="result-badge" id="resultBadge">
-          <span id="badgeEmoji">🐱</span>
-          <span id="badgeText">--</span>
+          <span id="badgeIcon">🐾</span>
+          <span id="badgeLabel">--</span>
         </div>
-        <p class="result-message" id="resultMessage">--</p>
+        <p class="result-desc" id="resultDesc">--</p>
 
-        <div class="confidence-meter">
-          <div class="confidence-meter-fill" id="meterFill"></div>
+        <div class="progress-bar-container">
+          <div class="progress-bar-fill" id="progressFill"></div>
         </div>
 
-        <div class="score-breakdown">
-          <div class="score-chip cat">
-            <div class="chip-label">🐱 Feline (Cat)</div>
-            <div class="chip-val" id="catProb">0.0%</div>
+        <div class="metrics-row">
+          <div class="metric-chip cat">
+            <div class="chip-title">🐱 Cat Score</div>
+            <div class="chip-value" id="valCat">0.0%</div>
           </div>
-          <div class="score-chip dog">
-            <div class="chip-label">🐶 Canine (Dog)</div>
-            <div class="chip-val" id="dogProb">0.0%</div>
+          <div class="metric-chip dog">
+            <div class="chip-title">🐶 Dog Score</div>
+            <div class="chip-value" id="valDog">0.0%</div>
           </div>
-          <div class="score-chip other">
-            <div class="chip-label">❓ Other / Not Pet</div>
-            <div class="chip-val" id="otherProb">0.0%</div>
+          <div class="metric-chip other">
+            <div class="chip-title">❓ Out-of-Dist</div>
+            <div class="chip-value" id="valOther">0.0%</div>
           </div>
         </div>
       </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="pinterest-footer">
-      Handcrafted with 💖 by <a href="https://github.com/Hix-001/Prodigy-InfoTech-ML-Internship/tree/main/PRODIGY_ML_03" target="_blank">Hix-001</a> · Prodigy InfoTech ML Internship
+    <!-- ===== Professional Footer ===== -->
+    <footer class="footer-section">
+      Built for Prodigy InfoTech ML Internship · 
+      <a href="https://github.com/Hix-001/" target="_blank">
+        <i class="fab fa-github"></i> Hix-001 Profile
+      </a>
     </footer>
 
   </div>
 
-  <!-- Interactive JavaScript Logic -->
+  <!-- Interactive JavaScript Engine -->
   <script>
     const dropzone = document.getElementById('dropzone');
-    const imageInput = document.getElementById('imageInput');
-    const previewWrapper = document.getElementById('previewWrapper');
+    const fileInput = document.getElementById('fileInput');
+    const previewSection = document.getElementById('previewSection');
     const previewImg = document.getElementById('previewImg');
-    const previewFilename = document.getElementById('previewFilename');
-    const classifyBtn = document.getElementById('classifyBtn');
-    const loaderWrap = document.getElementById('loaderWrap');
-    const resultBox = document.getElementById('resultBox');
+    const previewInfo = document.getElementById('previewInfo');
+    const submitBtn = document.getElementById('submitBtn');
+    const loadingBox = document.getElementById('loadingBox');
+    const resultsPanel = document.getElementById('resultsPanel');
     const resultBadge = document.getElementById('resultBadge');
-    const badgeEmoji = document.getElementById('badgeEmoji');
-    const badgeText = document.getElementById('badgeText');
-    const resultMessage = document.getElementById('resultMessage');
-    const meterFill = document.getElementById('meterFill');
-    const catProb = document.getElementById('catProb');
-    const dogProb = document.getElementById('dogProb');
-    const otherProb = document.getElementById('otherProb');
+    const badgeIcon = document.getElementById('badgeIcon');
+    const badgeLabel = document.getElementById('badgeLabel');
+    const resultDesc = document.getElementById('resultDesc');
+    const progressFill = document.getElementById('progressFill');
+    const valCat = document.getElementById('valCat');
+    const valDog = document.getElementById('valDog');
+    const valOther = document.getElementById('valOther');
 
-    let currentFile = null;
+    let activeImageFile = null;
 
-    imageInput.addEventListener('change', function(e) {
+    fileInput.addEventListener('change', function(e) {
       if (this.files && this.files[0]) {
-        processSelectedFile(this.files[0]);
+        handleFileSelection(this.files[0]);
       }
     });
 
@@ -669,37 +629,37 @@
       e.preventDefault();
       dropzone.classList.remove('dragover');
       if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-        processSelectedFile(e.dataTransfer.files[0]);
+        handleFileSelection(e.dataTransfer.files[0]);
       }
     });
 
-    function processSelectedFile(file) {
+    function handleFileSelection(file) {
       if (!file.type.startsWith('image/')) {
-        alert('Please pick a lovely image (PNG, JPG, JPEG, WEBP)! 🌸');
+        alert('Please select a valid image file (PNG, JPG, JPEG, WEBP, BMP)');
         return;
       }
 
-      currentFile = file;
+      activeImageFile = file;
       const reader = new FileReader();
       reader.onload = function(e) {
         previewImg.src = e.target.result;
-        previewWrapper.style.display = 'block';
-        previewFilename.textContent = `✨ ${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
-        classifyBtn.style.display = 'inline-flex';
-        resultBox.style.display = 'none';
+        previewSection.style.display = 'block';
+        previewInfo.textContent = `${file.name} · ${(file.size / 1024).toFixed(1)} KB`;
+        submitBtn.style.display = 'inline-flex';
+        resultsPanel.style.display = 'none';
       };
       reader.readAsDataURL(file);
     }
 
-    classifyBtn.addEventListener('click', function() {
-      if (!currentFile) return;
+    submitBtn.addEventListener('click', function() {
+      if (!activeImageFile) return;
 
-      classifyBtn.disabled = true;
-      loaderWrap.style.display = 'block';
-      resultBox.style.display = 'none';
+      submitBtn.disabled = true;
+      loadingBox.style.display = 'block';
+      resultsPanel.style.display = 'none';
 
       const formData = new FormData();
-      formData.append('image', currentFile);
+      formData.append('image', activeImageFile);
 
       fetch('/predict', {
         method: 'POST',
@@ -707,42 +667,42 @@
       })
       .then(res => res.json())
       .then(data => {
-        loaderWrap.style.display = 'none';
-        classifyBtn.disabled = false;
+        loadingBox.style.display = 'none';
+        submitBtn.disabled = false;
 
         if (!data.success) {
-          alert('Oops! Classification error: ' + (data.error || 'Unknown issue'));
+          alert('Classification failed: ' + (data.error || 'Unknown error'));
           return;
         }
 
-        displayAestheticResult(data);
+        renderPredictionResults(data);
       })
       .catch(err => {
-        loaderWrap.style.display = 'none';
-        classifyBtn.disabled = false;
-        alert('Network hiccup: ' + err.message);
+        loadingBox.style.display = 'none';
+        submitBtn.disabled = false;
+        alert('Connection error: ' + err.message);
       });
     });
 
-    function displayAestheticResult(data) {
+    function renderPredictionResults(data) {
       const label = data.label;
-      const conf = data.confidence;
+      const confidence = data.confidence;
       const scores = data.scores;
 
       resultBadge.className = 'result-badge ' + label.toLowerCase();
-      badgeText.textContent = label === 'Cat' ? 'Cat Detected!' : label === 'Dog' ? 'Dog Detected!' : 'Not a Pet!';
-      badgeEmoji.textContent = label === 'Cat' ? '🐱' : label === 'Dog' ? '🐶' : '❓';
+      badgeLabel.textContent = label === 'Cat' ? 'Cat Detected' : label === 'Dog' ? 'Dog Detected' : 'Out-of-Distribution / Invalid';
+      badgeIcon.textContent = label === 'Cat' ? '🐱' : label === 'Dog' ? '🐶' : '❓';
 
-      resultMessage.textContent = `${data.message} ✨ (${data.inference_time_ms} ms)`;
-      meterFill.style.width = `${conf}%`;
-      meterFill.className = 'confidence-meter-fill ' + label.toLowerCase();
+      resultDesc.textContent = `${data.message} (${data.inference_time_ms} ms inference)`;
+      progressFill.style.width = `${confidence}%`;
+      progressFill.className = 'progress-bar-fill ' + label.toLowerCase();
 
-      catProb.textContent = `${scores.Cat}%`;
-      dogProb.textContent = `${scores.Dog}%`;
-      otherProb.textContent = `${scores.Other}%`;
+      valCat.textContent = `${scores.Cat}%`;
+      valDog.textContent = `${scores.Dog}%`;
+      valOther.textContent = `${scores.Other}%`;
 
-      resultBox.style.display = 'block';
-      resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      resultsPanel.style.display = 'block';
+      resultsPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
   </script>
 </body>
