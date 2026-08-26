@@ -125,5 +125,5 @@ def health():
     return jsonify({'status': 'healthy', 'model': 'ResNet-50 (ImageNet-1k)', 'device': str(classifier.device)})
 
 if __name__ == '__main__':
-    print('[*] Starting Cat vs Dog Flask Web Application on http://127.0.0.1:5000')
-    app.run(host='0.0.0.0', port=5000, debug=False)
+    print('[*] Starting Cat vs Dog Flask Web Application on http://localhost:8967')
+    app.run(host='0.0.0.0', port=8967, debug=False)
