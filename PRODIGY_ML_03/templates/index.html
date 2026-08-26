@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐕 🐈 Cat vs Dog Vision AI Classifier | Prodigy InfoTech ML</title>
+    
+    <!-- Google Fonts & Font Awesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-base: #0a0d14;
+            --card-bg: rgba(18, 24, 38, 0.75);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --accent-primary: #38bdf8;
+            --accent-purple: #a855f7;
+            --accent-cat: #818cf8;
+            --accent-dog: #f43f5e;
+            --accent-invalid: #f59e0b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --glow-primary: rgba(56, 189, 248, 0.25);
+            --glow-purple: rgba(168, 85, 247, 0.2);
+            --radius-lg: 20px;
+            --radius-md: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 24px 16px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Ambient glowing background gradients */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 5%;
+            left: 10%;
+            width: 450px;
+            height: 450px;
+            background: radial-gradient(circle, var(--glow-primary) 0%, transparent 70%);
+            z-index: 0;
+            pointer-events: none;
+            filter: blur(60px);
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: 10%;
+            right: 10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--glow-purple) 0%, transparent 70%);
+            z-index: 0;
+            pointer-events: none;
+            filter: blur(60px);
+        }
+
+        .container {
+            max-width: 680px;
+            width: 100%;
+            z-index: 1;
+            position: relative;
+        }
+
+        /* Glassmorphic Main Card */
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+
+        /* Header Section */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            border-radius: 9999px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--accent-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #ffffff 30%, var(--accent-primary) 70%, var(--accent-purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* Drag & Drop Upload Zone */
+        .upload-zone {
+            border: 2px dashed rgba(255, 255, 255, 0.15);
+            border-radius: var(--radius-md);
+            padding: 36px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            background: rgba(255, 255, 255, 0.02);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .upload-zone:hover, .upload-zone.dragover {
+            border-color: var(--accent-primary);
+            background: rgba(56, 189, 248, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .upload-zone .icon-box {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: rgba(56, 189, 248, 0.1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            color: var(--accent-primary);
+            margin-bottom: 14px;
+            transition: var(--transition);
+        }
+
+        .upload-zone:hover .icon-box {
+            transform: scale(1.1);
+            background: rgba(56, 189, 248, 0.2);
+        }
+
+        .upload-zone h3 {
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .upload-zone p {
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        .upload-zone input[type="file"] {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Image Preview Box */
+        .preview-box {
+            display: none;
+            margin-top: 24px;
+            text-align: center;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .preview-image-wrapper {
+            position: relative;
+            display: inline-block;
+            max-width: 100%;
+        }
+
+        .preview-box img {
+            max-width: 100%;
+            max-height: 280px;
+            border-radius: var(--radius-md);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            object-fit: contain;
+        }
+
+        .file-meta {
+            margin-top: 10px;
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* Action Buttons */
+        .btn-predict {
+            width: 100%;
+            padding: 15px;
+            margin-top: 22px;
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            color: #04131f;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 20px rgba(56, 189, 248, 0.35);
+        }
+
+        .btn-predict:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(56, 189, 248, 0.5);
+            background: linear-gradient(135deg, #38bdf8, #7dd3fc);
+        }
+
+        .btn-predict:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Loading Spinner */
+        .spinner-wrapper {
+            display: none;
+            text-align: center;
+            margin: 24px 0;
+        }
+
+        .spinner {
+            width: 44px;
+            height: 44px;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-top: 4px solid var(--accent-primary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 12px;
+        }
+
+        .spinner-wrapper p {
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        /* Prediction Results Box */
+        .results-box {
+            display: none;
+            margin-top: 26px;
+            padding: 24px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: var(--radius-md);
+            animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .result-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .result-badge {
+            font-size: 26px;
+            font-weight: 800;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 24px;
+            border-radius: 9999px;
+            margin-bottom: 8px;
+        }
+
+        .result-badge.cat {
+            background: rgba(129, 140, 248, 0.15);
+            color: #a5b4fc;
+            border: 1px solid rgba(129, 140, 248, 0.35);
+        }
+
+        .result-badge.dog {
+            background: rgba(244, 63, 94, 0.15);
+            color: #fda4af;
+            border: 1px solid rgba(244, 63, 94, 0.35);
+        }
+
+        .result-badge.invalid {
+            background: rgba(245, 158, 11, 0.15);
+            color: #fcd34d;
+            border: 1px solid rgba(245, 158, 11, 0.35);
+        }
+
+        .result-explanation {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        /* Confidence Progress Meter */
+        .progress-section {
+            margin-bottom: 20px;
+        }
+
+        .progress-label-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .progress-track {
+            height: 10px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 9999px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 9999px;
+            width: 0%;
+            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .progress-fill.cat { background: linear-gradient(90deg, #6366f1, #818cf8); }
+        .progress-fill.dog { background: linear-gradient(90deg, #e11d48, #fb7185); }
+        .progress-fill.invalid { background: linear-gradient(90deg, #d97706, #fbbf24); }
+
+        /* Multi-class Metric Tiles */
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .metric-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 10px;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .metric-card .title {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .metric-card .value {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .metric-card.cat .value { color: #818cf8; }
+        .metric-card.dog .value { color: #f43f5e; }
+        .metric-card.other .value { color: #f59e0b; }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 24px;
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        .footer a {
+            color: var(--accent-primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .footer a:hover {
+            color: #7dd3fc;
+            text-decoration: underline;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.96); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 540px) {
+            .glass-card { padding: 24px 16px; }
+            .header h1 { font-size: 24px; }
+            .metric-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="glass-card">
+        
+        <!-- Header -->
+        <div class="header">
+            <div class="badge">
+                <i class="fas fa-brain"></i> Deep Learning Vision Pipeline
+            </div>
+            <h1>🐈 Cats vs Dogs Classifier 🐕</h1>
+            <p>Upload an image to execute high-accuracy inference via pre-trained ResNet-50</p>
+        </div>
+
+        <!-- Upload Dropzone -->
+        <div class="upload-zone" id="uploadZone">
+            <div class="icon-box">
+                <i class="fas fa-cloud-upload-alt"></i>
+            </div>
+            <h3>Drop your pet image here</h3>
+            <p>Supports PNG, JPG, JPEG, WEBP · Drag & drop or click</p>
+            <input type="file" id="fileInput" accept="image/*">
+        </div>
+
+        <!-- Image Preview -->
+        <div class="preview-box" id="previewBox">
+            <div class="preview-image-wrapper">
+                <img id="previewImg" alt="Input Preview">
+            </div>
+            <div class="file-meta" id="fileMeta"></div>
+        </div>
+
+        <!-- Prediction Button -->
+        <button class="btn-predict" id="predictBtn">
+            <i class="fas fa-bolt"></i> Classify Image
+        </button>
+
+        <!-- Loading State -->
+        <div class="spinner-wrapper" id="spinnerWrapper">
+            <div class="spinner"></div>
+            <p>Running ResNet-50 deep tensor inference...</p>
+        </div>
+
+        <!-- Prediction Results Panel -->
+        <div class="results-box" id="resultsBox">
+            <div class="result-header">
+                <div class="result-badge" id="resultBadge">
+                    <span id="resultEmoji">🐾</span>
+                    <span id="resultText">--</span>
+                </div>
+                <div class="result-explanation" id="resultExplanation">--</div>
+            </div>
+
+            <!-- Confidence Progress Bar -->
+            <div class="progress-section">
+                <div class="progress-label-row">
+                    <span>Classification Confidence</span>
+                    <span id="confidencePercentage">0%</span>
+                </div>
+                <div class="progress-track">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+
+            <!-- Detailed Probability Tiles -->
+            <div class="metric-grid">
+                <div class="metric-card cat">
+                    <div class="title">🐱 Feline (Cat)</div>
+                    <div class="value" id="scoreCat">0.0%</div>
+                </div>
+                <div class="metric-card dog">
+                    <div class="title">🐶 Canine (Dog)</div>
+                    <div class="value" id="scoreDog">0.0%</div>
+                </div>
+                <div class="metric-card other">
+                    <div class="title">❓ Other / Invalid</div>
+                    <div class="value" id="scoreOther">0.0%</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- App Footer -->
+        <div class="footer">
+            Prodigy InfoTech ML Internship · 
+            <a href="https://github.com/Hix-001/Prodigy-InfoTech-ML-Internship" target="_blank">
+                <i class="fab fa-github"></i> Repository
+            </a>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    const uploadZone = document.getElementById('uploadZone');
+    const fileInput = document.getElementById('fileInput');
+    const previewBox = document.getElementById('previewBox');
+    const previewImg = document.getElementById('previewImg');
+    const fileMeta = document.getElementById('fileMeta');
+    const predictBtn = document.getElementById('predictBtn');
+    const spinnerWrapper = document.getElementById('spinnerWrapper');
+    const resultsBox = document.getElementById('resultsBox');
+    const resultBadge = document.getElementById('resultBadge');
+    const resultEmoji = document.getElementById('resultEmoji');
+    const resultText = document.getElementById('resultText');
+    const resultExplanation = document.getElementById('resultExplanation');
+    const confidencePercentage = document.getElementById('confidencePercentage');
+    const progressFill = document.getElementById('progressFill');
+    const scoreCat = document.getElementById('scoreCat');
+    const scoreDog = document.getElementById('scoreDog');
+    const scoreOther = document.getElementById('scoreOther');
+
+    let selectedFile = null;
+
+    fileInput.addEventListener('change', function(e) {
+        if (this.files && this.files[0]) {
+            handleSelectedFile(this.files[0]);
+        }
+    });
+
+    uploadZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        uploadZone.classList.add('dragover');
+    });
+
+    uploadZone.addEventListener('dragleave', (e) => {
+        e.preventDefault();
+        uploadZone.classList.remove('dragover');
+    });
+
+    uploadZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        uploadZone.classList.remove('dragover');
+        if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+            handleSelectedFile(e.dataTransfer.files[0]);
+        }
+    });
+
+    function handleSelectedFile(file) {
+        if (!file.type.startsWith('image/')) {
+            alert('Please select a valid image file (PNG, JPG, JPEG, WEBP, etc.)');
+            return;
+        }
+
+        selectedFile = file;
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            previewImg.src = e.target.result;
+            previewBox.style.display = 'block';
+            fileMeta.textContent = `${file.name} · ${(file.size / 1024).toFixed(1)} KB`;
+            predictBtn.style.display = 'inline-flex';
+            resultsBox.style.display = 'none';
+        };
+        reader.readAsDataURL(file);
+    }
+
+    predictBtn.addEventListener('click', function() {
+        if (!selectedFile) return;
+
+        predictBtn.disabled = true;
+        spinnerWrapper.style.display = 'block';
+        resultsBox.style.display = 'none';
+
+        const formData = new FormData();
+        formData.append('image', selectedFile);
+
+        fetch('/predict', {
+            method: 'POST',
+            body: formData
+        })
+        .then(res => res.json())
+        .then(data => {
+            spinnerWrapper.style.display = 'none';
+            predictBtn.disabled = false;
+
+            if (!data.success) {
+                alert('Classification error: ' + (data.error || 'Unknown failure'));
+                return;
+            }
+
+            renderPrediction(data);
+        })
+        .catch(err => {
+            spinnerWrapper.style.display = 'none';
+            predictBtn.disabled = false;
+            alert('Network communication error: ' + err.message);
+        });
+    });
+
+    function renderPrediction(data) {
+        const label = data.label;
+        const conf = data.confidence;
+        const scores = data.scores;
+
+        resultBadge.className = 'result-badge ' + label.toLowerCase();
+        resultText.textContent = label;
+
+        if (label === 'Cat') {
+            resultEmoji.textContent = '🐱';
+        } else if (label === 'Dog') {
+            resultEmoji.textContent = '🐶';
+        } else {
+            resultEmoji.textContent = '❓';
+        }
+
+        resultExplanation.textContent = data.message + ` (${data.inference_time_ms} ms)`;
+        confidencePercentage.textContent = `${conf}%`;
+        progressFill.style.width = `${conf}%`;
+        progressFill.className = 'progress-fill ' + label.toLowerCase();
+
+        scoreCat.textContent = `${scores.Cat}%`;
+        scoreDog.textContent = `${scores.Dog}%`;
+        scoreOther.textContent = `${scores.Other}%`;
+
+        resultsBox.style.display = 'block';
+        resultsBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+</script>
+
+</body>
+</html>
