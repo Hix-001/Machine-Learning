@@ -198,5 +198,6 @@ def health():
     })
 
 if __name__ == '__main__':
-    print("[*] Starting Cat vs Dog Flask Web Application on http://localhost:8098")
-    app.run(host='0.0.0.0', port=8098, debug=False)
+    port = int(os.environ.get('PORT', 8080))
+    print(f"[*] Starting Nekop AI Flask Web Application on http://localhost:{port}")
+    app.run(host='0.0.0.0', port=port, debug=False)
