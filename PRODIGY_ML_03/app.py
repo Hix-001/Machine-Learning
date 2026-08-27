@@ -198,5 +198,5 @@ def health():
     })
 
 if __name__ == '__main__':
-    print("[*] Starting Cat vs Dog Flask Web Application on http://localhost:9802")
-    app.run(host='0.0.0.0', port=9802, debug=False)
+    print("[*] Starting Cat vs Dog Flask Web Application on http://localhost:8098")
+    app.run(host='0.0.0.0', port=8098, debug=False)
